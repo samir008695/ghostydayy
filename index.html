@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Mayra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(180deg, #8b0000 0%, #1e0b36 50%, #0a235c 100%); 
+            font-family: 'Playfair Display', Georgia, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ambient-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #8b0000 0%, #0a235c 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 1.5s ease-in-out, visibility 1.5s;
+        }
+
+        .play-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .play-btn:hover {
+            border-color: #ffffff;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+            letter-spacing: 4px;
+        }
+
+        .center-content-box {
+            display: none;
+            opacity: 0;
+            width: 95%;
+            max-width: 1000px;
+            text-align: center;
+            z-index: 10;
+            margin-top: 5vh; 
+        }
+
+        .banner-line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 5vh;
+        }
+
+        .word-group {
+            display: inline-flex;
+            white-space: nowrap;
+        }
+
+        .letter-flag {
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            font-size: 1.9rem;
+            font-weight: 800;
+            padding: 12px 16px;
+            margin: 4px 2px;
+            border-radius: 4px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            display: inline-block;
+            transform-origin: top center;
+        }
+
+        .flag-c1 { transform: translateY(14px) rotate(-6deg); }
+        .flag-c2 { transform: translateY(6px) rotate(-3deg); }
+        .flag-c3 { transform: translateY(0px) rotate(0deg); }
+        .flag-c4 { transform: translateY(6px) rotate(3deg); }
+        .flag-c5 { transform: translateY(14px) rotate(6deg); }
+
+        .sub-wish {
+            color: #ffffff;
+            font-size: 2.3rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.5;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+            margin-top: 30px;
+        }
+
+        .element {
+            position: absolute;
+            bottom: -60px;
+            opacity: 0.85;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.85; }
+            85% { opacity: 0.85; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .letter-flag {
+                font-size: 1.1rem;
+                padding: 6px 9px;
+                margin: 2px 1px;
+            }
+            .sub-wish {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="intro-overlay" id="introOverlay">
+        <button class="play-btn" onclick="startExperience()">Open</button>
+    </div>
+
+    <!-- Points directly to your local file now -->
+    <audio id="bgm" loop preload="auto">
+        <source src="birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="ambient-container" id="ambientContainer"></div>
+
+    <div class="center-content-box" id="centerBox">
+        <div class="banner-line">
+            <div class="word-group">
+                <span class="letter-flag flag-c1">H</span>
+                <span class="letter-flag flag-c2">A</span>
+                <span class="letter-flag flag-c3">P</span>
+                <span class="letter-flag flag-c4">P</span>
+                <span class="letter-flag flag-c5">Y</span>
+            </div>
+            <div class="word-group">
+                <span class="letter-flag flag-c1">B</span>
+                <span class="letter-flag flag-c2">I</span>
+                <span class="letter-flag flag-c3">R</span>
+                <span class="letter-flag flag-c4">T</span>
+                <span class="letter-flag flag-c5">H</span>
+                <span class="letter-flag flag-c4">D</span>
+                <span class="letter-flag flag-c3">A</span>
+                <span class="letter-flag flag-c2">Y</span>
+            </div>
+            <div class="word-group">
+                <span class="letter-flag flag-c1">M</span>
+                <span class="letter-flag flag-c2">A</span>
+                <span class="letter-flag flag-c3">Y</span>
+                <span class="letter-flag flag-c4">R</span>
+                <span class="letter-flag flag-c5">A</span>
+            </div>
+        </div>
+
+        <div class="sub-wish">
+            HAPPY BIRTHDAY MY WORLD MY LOVE
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgm');
+        const overlay = document.getElementById('introOverlay');
+        const centerBox = document.getElementById('centerBox');
+
+        function startExperience() {
+            audio.volume = 0.5;
+            audio.play().catch(err => console.log("Audio play error:", err));
+
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
+
+            centerBox.style.display = 'block';
+            setTimeout(() => {
+                centerBox.style.animation = "fadeInContent 2.5s ease-out forwards";
+            }, 100);
+
+            setInterval(createAmbientElement, 750);
+            for(let i = 0; i < 7; i++) {
+                setTimeout(createAmbientElement, Math.random() * 2500);
+            }
+        }
+
+        function createAmbientElement() {
+            const container = document.getElementById('ambientContainer');
+            const element = document.createElement('div');
+            element.classList.add('element');
+            
+            const choices = ['🌹', '🤍', '🌸', '🎈', '🎈', '🎈'];
+            const choiceIndex = Math.floor(Math.random() * choices.length);
+            let displayItem = choices[choiceIndex];
+            
+            if (choiceIndex === 4) {
+                element.style.filter = "hue-rotate(300deg)"; 
+            } else if (choiceIndex === 5) {
+                element.style.filter = "hue-rotate(210deg)"; 
+            }
+            
+            element.innerText = displayItem;
+            
+            const randomLeft = Math.random() * 100;
+            const randomSize = Math.random() * (35 - 22) + 22; 
+            const duration = Math.random() * (14 - 9) + 9;   
+            
+            element.style.left = `${randomLeft}vw`;
+            element.style.fontSize = `${randomSize}px`;
+            element.style.animationDuration = `${duration}s`;
+            
+            container.appendChild(element);
+
+            setTimeout(() => {
+                element.remove();
+            }, duration * 1000);
+        }
+    </script>
+</body>
+</html>
